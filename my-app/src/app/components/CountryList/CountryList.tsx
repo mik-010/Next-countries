@@ -22,11 +22,14 @@ export default function CountryList() {
   const [error, setError] = useState<string>("");
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const baseUrl = process.env.NEXT_PUBLIC_COUNTRIES_API;
 
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_COUNTRIES_API;
+        if (!baseUrl) {
+          throw new Error("API base URL is not defined");
+        }
 
         let endpoint = `${baseUrl}/all?fields=name,flags,population,region,capital,cca3`;
 
