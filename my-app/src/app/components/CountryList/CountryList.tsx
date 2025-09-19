@@ -49,14 +49,18 @@ export default function CountryList() {
 
         setCountries(Array.isArray(data) ? data : []);
         setError("");
-      } catch (err: any) {
-        setCountries([]);
-        setError(err.message || "Unknown error occurred");
+      } catch (err: unknown) {
+          setCountries([]);
+          if (err instanceof Error) {
+              setError(err.message);
+          } else {
+              setError("Unknown error occurred");
+          }
       }
     };
 
     fetchCountries();
-  }, [debouncedSearchTerm, selectedRegion]);
+  }, [debouncedSearchTerm, selectedRegion, baseUrl]);
 
   return (
     <>

@@ -27,7 +27,7 @@ export default function Filter({
       />
       <RegionSelect
         value={selectedRegion}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           onRegionChange(e.target.value)
         }
       >
